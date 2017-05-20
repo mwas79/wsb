@@ -10,28 +10,38 @@ namespace Szachy.Klasy
 
         public string Pole
         {
-			get { return pole; }
+			get {
+                return pole;
+            }
             set 
 			{ 
                 pole = value;
-                this.x = convertX(pole);
+                this.x = zmienX(pole);
 				this.y = Int32.Parse(pole[1].ToString()); 
             }
         }
 
         public int X
         {
-            get { return x; }
-            set { x = value; }
+            get {
+                return x;
+            }
+            set {
+                x = value;
+            }
         }
        
         public int Y
         {
-            get { return y; }
-            set { y = value; }
+            get {
+                return y;
+            }
+            set {
+                y = value;
+            }
         }
 
-        private int convertX(string str)
+        private int zmienX(string str)
         {
 			switch(str[0].ToString().ToUpper()) {
                 case "A":
@@ -51,10 +61,10 @@ namespace Szachy.Klasy
                 case "H":
                     return 8;
                 default:
-					Console.WriteLine("Podano złą pozycje");
+					Console.WriteLine("Zła pozycja !");
 					this.x = 0;
 					this.y = 0;
-					this.pole = "NN";
+					this.pole = "Nieznane";
                     return 0;
             }
             
@@ -80,24 +90,32 @@ namespace Szachy.Klasy
 
 				switch (X)
 				{
-					case 1: this.pole = "A" + Y; break;
-					case 2: this.pole = "B" + Y; break;
-					case 3: this.pole = "C" + Y; break;
-					case 4: this.pole = "D" + Y; break;
-					case 5: this.pole = "E" + Y; break;
-					case 6: this.pole = "F" + Y; break;
-					case 7: this.pole = "G" + Y; break;
-					case 8: this.pole = "H" + Y; break;
+					case 1: this.pole = "A" + Y;
+                            break;
+					case 2: this.pole = "B" + Y;
+                            break;
+					case 3: this.pole = "C" + Y;
+                            break;
+					case 4: this.pole = "D" + Y;
+                            break;
+					case 5: this.pole = "E" + Y;
+                            break;
+					case 6: this.pole = "F" + Y;
+                            break;
+					case 7: this.pole = "G" + Y;
+                            break;
+					case 8: this.pole = "H" + Y;
+                            break;
 					default:
 						this.x = 0;
 						this.y = 0;
-						this.pole = "NN";
+						this.pole = "Nieznane";
 						break;
 				}
 			}
 			else
 			{
-				this.pole = "NN";
+				this.pole = "Nieznane";
 			}
 		}
     }
