@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Klasy\Toolbox.cs" />
     <Compile Include="Klasy\Figura.cs" />
     <Compile Include="Klasy\Figury\Goniec.cs" />
     <Compile Include="Klasy\Figury\Krol.cs" />

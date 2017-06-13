@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Szachy.Klasy.Figury;
 
 namespace Szachy.Klasy
 {
@@ -10,6 +11,7 @@ namespace Szachy.Klasy
 		public string kolor;
 		public Pozycja pozycja;
 		public static List<Figura> figury = new List<Figura>();
+        public delegate void komruch(bool powodzenie);
 
 		public const string KOLOR_BIALY = "biały";
 		public const string KOLOR_CZARNY = "czarny";
@@ -52,16 +54,50 @@ namespace Szachy.Klasy
 
 		public virtual void ruch(Pozycja nowaPozycja)
 		{
-			if (this.sprawdzRuch(nowaPozycja))
+            komruch komunikat = new komruch(Komunikat);
+
+            if (this.sprawdzRuch(nowaPozycja))
 			{
 				this.pozycja = nowaPozycja;
-				Console.WriteLine("Ruch: {0}({1}) został przesunięty na pole {2}", this.nazwa, this.kolor, this.pozycja.Pole);
+                komunikat(true);
+
+                //Console.WriteLine("Ruch: {0}({1}) został przesunięty na pole {2}", this.nazwa, this.kolor, this.pozycja.Pole);
 			}
 			else
 			{
-				Console.WriteLine("Błąd: Pole {0} jest zajęte lub wykracza poza dozwolony ruch dla figury: {1}.", nowaPozycja.Pole, this.nazwa);
+                komunikat(false);
+                //Console.WriteLine("Błąd: Pole {0} jest zajęte lub wykracza poza dozwolony ruch dla figury: {1}.", nowaPozycja.Pole, this.nazwa);
 			}
 		}
+
+        public static void Komunikat(bool powodzenie)
+        {
+            if(powodzenie)
+            {
+                Console.WriteLine("Figura została przesunięta");
+            }
+            else
+            {
+                Console.WriteLine("Błąd, pole zajęte lub poza zakresem ruchu figury");
+            }
+        }
+
+        public static Figura FabrykaFigurek(string figura, string kolor)
+        {
+            switch (figura)
+            {
+                case "krol":
+                    return new Krol(kolor);
+                case "goniec":
+                    return new Goniec(kolor);
+                case "wieza":
+                    return new Wieza(kolor);
+                case "dama":
+                    return new Dama(kolor);
+                default:
+                    throw new NotSupportedException("Nieprawidłowa figura !");
+            }
+        }
 
 	}
 }
